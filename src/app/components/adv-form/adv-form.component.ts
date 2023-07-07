@@ -1,16 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { forbiddenNameValidator } from './custom-validators';
 
-/**
- * Documentation officielle:
- * https://angular.io/guide/reactive-forms
- */
-
-/**
-* Autres sources:
-* https://indepth.dev/posts/1311/the-update-on-option-in-angular-forms
-*/
 interface User {
   email: string;
 }
@@ -28,9 +20,13 @@ export class AdvFormComponent {
    * validators: Logique de validation du champ (Validator unique ou array de Validators).
    * updateOn: Quand updater la valeur du formControl ? ('change' | 'blur' | 'submit')
    */
-  emailFormControl = new FormGroup({
+  emailForm = new FormGroup({
     fullName: new FormControl('', { validators: [Validators.required, Validators.email], updateOn: 'blur', }),
     email: new FormControl('', { updateOn: 'submit' }),
+  });
+
+  plopForm = new FormGroup({
+    name: new FormControl('', { validators: [forbiddenNameValidator(/Gargamel/i)], updateOn: 'blur', }),
   });
 
   myUser: User = { email: "plop" };

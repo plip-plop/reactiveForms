@@ -1,0 +1,40 @@
+<h1>1 - FormGroup + FormControl (Référence par FormControlName)</h1>
+<!-- "mat-form-field" sert uniquement à porter la logique d'Angular Material! -->
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>First Name: </mat-label>
+        <input matInput type="text" formControlName="firstName" matTooltip="Info about the action">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Last Name: </mat-label>
+        <input matInput type="text" formControlName="lastName">
+    </mat-form-field>
+</form>
+
+<h1>2 - FormControl sans FormGroup (Référence par FormControl)</h1>
+<!-- Avantage: Pas besoin de stocker le formControl dans une variable -->
+<mat-form-field>
+    <mat-label>Label plop: </mat-label>
+    <!-- Property "Title" valorisée avec une string vide, pour overrider les tooltips natives du browser -->
+    <!-- A noter que sans property "matTooltip", la tooltip native ne s'affiche pas! -->
+    <input matInput type="text" title="" [formControl]="plop" matTooltip="Tooltip AM">
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Label plip: </mat-label>
+    <textarea matInput type="text" title="" [formControl]="plip" matTooltip="Tooltip AM"></textarea>
+</mat-form-field>
+
+<h1>3 - Nested FormGroup (logique aprent/enfant)</h1>
+<h2>Parent component</h2>
+<form [formGroup]="stateForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>city: </mat-label>
+        <input matInput type="text" formControlName="city" required="true" matTooltip="city Tooltip">
+    </mat-form-field>
+    <h2>Child component</h2>
+    <app-child-form [parentFormGroup]="addressForm" />
+    <!-- Bouton dans un form -> La property type="submit" devient implicite -->
+    <button>Submit</button>
+</form>
