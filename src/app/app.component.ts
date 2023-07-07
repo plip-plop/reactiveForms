@@ -18,6 +18,7 @@ import { ChildComponent } from "./components/child/child.component";
 })
 export class AppComponent implements OnInit {
   title = 'reactiveForms';
+
   plop = new FormControl('myplop', Validators.required);
   plip = new FormControl('myplip', Validators.required);
 
@@ -26,8 +27,8 @@ export class AppComponent implements OnInit {
     lastName: new FormControl('', Validators.required),
   });
 
-  profileForm2 = new FormGroup({
-    city: new FormControl('MyCity', Validators.required),
+  stateForm = new FormGroup({
+    city: new FormControl('DefaultCity', Validators.required),
     addressForm: new FormGroup({
       zip: new FormControl('DefaultZipCode', Validators.required),
     })
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit {
 
   // Méthode "get" sur le formGroup imbriqué du parent: nécessaire pour alimenter le composant enfant!
   get addressForm() {
-		return this.profileForm2.get("addressForm") as FormGroup;
+		return this.stateForm.get("addressForm") as FormGroup;
 	}
 
   ngOnInit(): void {
@@ -43,7 +44,7 @@ export class AppComponent implements OnInit {
       tap(console.log)
     ).subscribe();
 
-    this.profileForm2.valueChanges.pipe(
+    this.stateForm.valueChanges.pipe(
       tap(console.log)
     ).subscribe();
   }
