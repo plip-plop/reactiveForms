@@ -1,0 +1,4 @@
+<ng-template *ngIf="false; else anchorWithHref" [routerLink]=""><a >anchorWithRouterLink</a></ng-template>
+<ng-template #anchorWithHref>
+    <a href="{{pathUrl}}">anchorWithHref</a>
+</ng-template>
